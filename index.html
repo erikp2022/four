@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tengo que decirle algo importante</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #ffb3c6, #ffdee9);
+      color: #4a4a4a;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100dvh;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Great Vibes', cursive;
+      color: #fff;
+    }
+
+    .section1 span {
+      display: block;
+      margin: 10px 0;
+    }
+
+    .section1 .span-1 {
+      font-size: 4rem;
+    }
+
+    .section1 .span-2 {
+      font-size: 2.5rem;
+    }
+
+    .section1 .span-3 {
+      font-size: 3rem;
+    }
+
+    .section1 .span-4 {
+      font-size: 2rem;
+    }
+
+    button {
+      width: 100px;
+      height: 40px;
+      border: none;
+      border-radius: 20px;
+      background: #f25487;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background: #e63978;
+    }
+
+    .section2 p {
+      font-size: 2.5rem;
+      text-align: center;
+      color: #fff;
+      font-family: 'Great Vibes', cursive;
+      animation: fade-in 2s ease forwards;
+    }
+
+    .desactivado {
+      display: none;
+    }
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Floating Hearts Animation */
+    .hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 105, 135, 0.7);
+      position: absolute;
+      bottom: 0;
+      animation: float 5s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
+  <script type="module">
+    const $ = (e) => document.getElementById(e);
+    const section1 = $("s1");
+    const btn = $("btn");
+    const section2 = $("s2");
+    const pLetras = $("pLetras");
+
+    const letrasConfig = [
+      { palabras: ["Te amo", "demasiado"], tiempo: 0 },
+     { palabras: ["gracias por estos 4 meses"], tiempo: 1900 },
+      { palabras: ["soy", "muy feliz"], tiempo: 3800 },
+      { palabras: ["de tener",  "la mejor"], tiempo: 5700 },
+      { palabras: ["novia", "del mundo"], tiempo: 7600 },
+      { palabras: ["la más preciosa"], tiempo: 9500 },
+      { palabras: ["y la más guapa"], tiempo: 11400 },
+      { palabras: ["linda que existe"], tiempo: 13300 },
+      { palabras: ["ante", "mis ojos"], tiempo: 15200 },
+      { palabras: ["gracias", "por llegar"], tiempo: 17500 },
+      { palabras: ["a mi vida"], tiempo: 19400 },
+      { palabras: ["amor", "de mi vida"], tiempo: 21300 },
+      { palabras: ["dueña", "de mi corazon"], tiempo: 23800 },
+      { palabras: ["que me alegra infinitamente"], tiempo: 26500, esUltimo: true },
+    ];
+
+    btn.addEventListener("click", () => {
+      section1.classList.add("desactivado");
+      section2.classList.remove("desactivado");
+      mostrarLetras(letrasConfig);
+    });
+
+    function mostrarLetras(config) {
+      config.forEach((letraObj) => {
+        setTimeout(() => {
+          pLetras.innerHTML = "";
+
+          const span1 = document.createElement("span");
+          span1.textContent = letraObj.palabras[0];
+          pLetras.appendChild(span1);
+
+          const saltoDeLinea = document.createElement("br");
+          pLetras.appendChild(saltoDeLinea);
+
+          if (letraObj.esUltimo) {
+            setTimeout(() => {
+              pLetras.innerHTML = "";
+              const span = document.createElement("span");
+              const saltoDeLinea = document.createElement("br");
+
+              span.innerHTML = `
+                Feliz 4 meses mi amor 🎊 <br />
+                <br>
+                Te amo demasiadooo y nunca dejare de hacerlo
+                <br>
+                
+               Es mi vida, amor de mi vida 💖 
+
+              `;
+              pLetras.appendChild(span);
+              pLetras.appendChild(saltoDeLinea);
+              pLetras.classList.add("meme-final");
+            }, 2500);
+          } else {
+            const span2 = document.createElement("span");
+            span2.textContent = letraObj.palabras[1];
+            pLetras.appendChild(span2);
+          }
+        }, letraObj.tiempo);
+      });
+    }
+  </script>
+</head>
+<body>
+  <div class="section1" id="s1">
+    <h1>
+      <span class="span-1">Hola</span>
+      <span class="span-2">Lehaa</span>
+      <span class="span-3">mi amooor</span>
+      <span class="span-2">quiero decirle</span>
+      <span class="span-4">que...</span>
+      <button id="btn">Ver</button>
+    </h1>
+  </div>
+  <div class="section2 desactivado" id="s2">
+    <p class="letras" id="pLetras"></p>
+    <div class="hearts">
+      <!-- Floating hearts -->
+      <div class="heart" style="left: 10%; animation-duration: 4s;"></div>
+      <div class="heart" style="left: 20%; animation-duration: 5s;"></div>
+      <div class="heart" style="left: 30%; animation-duration: 6s;"></div>
+    </div>
+  </div>
+</body>
+</html>
